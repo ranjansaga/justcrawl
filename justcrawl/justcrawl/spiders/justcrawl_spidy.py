@@ -4,11 +4,10 @@ from justcrawl.items import Website
 
 
 class JustCrawlSpider(Spider):
-    name = "justdial"
-    allowed_domains = ["justdial.com"]
+    name = "jobdetails"
+    allowed_domains = ["allindiajobs.com"]
     start_urls = [
-        "http://www.justdial.com/Bangalore/Plumbers/ct-134859/page-1",
-        "http://www.justdial.com/Bangalore/Plumbers/ct-134859/page-2",
+                   "http://www.allindiajobs.in/"
     ]
 
     def parse(self, response):
@@ -20,13 +19,14 @@ class JustCrawlSpider(Spider):
         @scrapes name
         """
         sel = Selector(response)
-        sites = sel.xpath("//*/section[@class='rslwrp']/section/section[2]/section/aside[@class='compdt']")
+        sites = sel.xpath(".//*/div[@class='post h-entry']")
         items = []
 
         for site in sites:
             item = Website()
-            item['name'] = site.xpath("p/span[@class='jcn']/a/@title").extract()
-            item['phone'] = site.xpath("p[@class='jrcw']/a/@href").extract()
+            item['company'] = site.xpath("h2/a/text()").extract()
+            item['date'] = site.xpath("div[2]/div[2]/b/span/text()").extract()
             items.append(item)
 
         return items
+
