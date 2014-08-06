@@ -7,6 +7,16 @@ Pre requisites:
     OpenSSL. This comes preinstalled in all operating systems except Windows 
     pip or easy_install Python package managers
 
+Installation: 
+
+	To install using pip:
+
+		pip install Scrapy
+
+	To install using easy_install:
+
+		easy_install Scrapy
+
 
 Running the project:
 	
